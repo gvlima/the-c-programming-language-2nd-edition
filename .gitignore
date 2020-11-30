@@ -1,0 +1,6 @@
+# untracked directories
+**/.idea/
+**/cmake-build-debug/
+
+# untracked files
+**/CMakeLists.txt
