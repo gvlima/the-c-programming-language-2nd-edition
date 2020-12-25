@@ -1,5 +1,3 @@
-
-
 ## Learn C
 Learn C language is part of my study plan toward build a solid foundations of programming and concepts of computer science, understand the underlying architecture of how things works and the essentials of programming like register, pointers, stack, heap, memory management and I/O.
 
@@ -12,11 +10,7 @@ The first C programming book “C Programming Language” was published in 1978,
 
 Kernighan & Ritchie’s **_The C Programming Language_** it’s a small book, but as the Preface says, “_C is not a big language, and it is not well served by a big book._”. Co-author Dennis Ritchie designed and implemented the C language on the UNIX operating system on the DEC PDP-11 and Brian Kernighan contributed to the development of UNIX. 
 
-The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output.  
-  
-The book then continues through Types, Operators, Expressions, Control Flow, Pointers, Arrays, Structs, Input and Output in greater detail.
-
-This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
+The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output. Then continues through in greater detail with Types, Operators, Expressions, Pointers, Arrays, Structs and more Input and Output. This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
 
 ## Notes
 
