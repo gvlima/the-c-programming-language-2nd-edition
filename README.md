@@ -1,15 +1,22 @@
-## The C programming Language 
+
+
+## Learn C
 Learn C language is part of my study plan toward build a solid foundations of programming and concepts of computer science, understand the underlying architecture of how things works and the essentials of programming like register, pointers, stack, heap, memory management and I/O.
 
 C is a middle-level programming language, it has some abstractions and also low-level elements, C is used to build compilers, interpreters, editors, operating systems, embedded systems and has influenced many others modern languages.
 
-
-## About book
-The first C programming book “C Programming Language” was published in 1978, written by Brian Kernighan and Dennis Ritchie. With the rapid growth of the C language for several years, it was time to standardize the language and are also known as ANSI C.
-
-Kernighan & Ritchie’s **_The C Programming Language_** it’s a small book, but as the Preface says, “_C is not a big language, and it is not well served by a big book._”. Co-author Dennis Ritchie designed and implemented the C language on the UNIX operating system on the DEC PDP-11 and Brian Kernighan contributed to the development of UNIX. The focus of the book is the C programming language, however, the approach is general, so it can be extended to all programming languages.
-
 This repository contains the _solutions_ to the exercises from each chapter of the book, these solutions are meant to be helpful for those who want to learn to program with the C language.
+
+## The C programming Language  - Book Review
+The first C programming book “C Programming Language” was published in 1978, written by Brian Kernighan and Dennis Ritchie. With the rapid growth of the C language for several years, it was time to standardize the language and are also known as ANSI C. The focus of the book is the C programming language, however, the approach is general, so it can be extended to all programming languages.
+
+Kernighan & Ritchie’s **_The C Programming Language_** it’s a small book, but as the Preface says, “_C is not a big language, and it is not well served by a big book._”. Co-author Dennis Ritchie designed and implemented the C language on the UNIX operating system on the DEC PDP-11 and Brian Kernighan contributed to the development of UNIX. 
+
+The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output.  
+  
+The book then continues through Types, Operators, Expressions, Control Flow, Pointers, Arrays, Structs, Input and Output in greater detail.
+
+This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
 
 ## Notes
 
