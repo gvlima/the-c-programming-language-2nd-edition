@@ -25,7 +25,7 @@ Following my progress for each chapter.
 
 - [ ] Chapter 1 -  A Tutorial Introduction - (23/24)
 - [x] Chapter 2 -  Types, Operators, and Expressions - (10/10)
-- [x] Chapter 3 - Control Flow - (3/12)
+- [x] Chapter 3 - Control Flow - (12/12)
 - [ ] Chapter 4 - Functions and Program Structure - (0/14)
 - [ ] Chapter 5 - Pointers and Arrays - (0/20)
 - [ ] Chapter 6 - Structures - (0/6)
