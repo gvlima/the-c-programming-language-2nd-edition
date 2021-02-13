@@ -1,13 +1,13 @@
 /**
- * Chapter: 1
- * Exercise: 1-20 - Write a program detab that replaces tabs in the input with the proper number of blanks to space to the
- * next tab stop. Assume a fixed set of tab stops, say every n columns. Should n be a variable or a symbolic parameter?
+ * Chapter: 5
+ * Exercise: 5-11 - Modify the programs entab and detab (written as exercises in Chapter 1) to accept a list of tabs stops
+ * as arguments. Use the default tab settings if there no arguments.
  **/
 
 #include <stdio.h>
 #define TABINC 8
 
-int main() {
+int main(int argc, char* argv[]) {
     int c, blank, pos;
     pos = 1;
 
@@ -15,11 +15,11 @@ int main() {
         if(c == '\t'){
             blank = TABINC - ((pos - 1) % TABINC);
             while(blank > 0){
-                putchar(' ');
+                putchar('*');
                 ++pos;
                 --blank;
             }
-        }else if( c == '\n'){
+        } else if( c == '\n') {
             putchar(c);
             pos = 1;
         } else {
@@ -27,6 +27,5 @@ int main() {
             ++pos;
         }
     }
-
     return 0;
 }
