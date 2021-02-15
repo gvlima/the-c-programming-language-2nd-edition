@@ -6,13 +6,13 @@ The first C programming book “C Programming Language” was published in 1978,
 
 This repository contains the _solutions_ to the exercises from each chapter of the book, these solutions are meant to be helpful for those who want to learn to program with the C language.
 
-## Book Review
+### Book Review
 
 Kernighan & Ritchie’s **_The C Programming Language_** it’s a small book, but as the Preface says, “_C is not a big language, and it is not well served by a big book._”. Co-author Dennis Ritchie designed and implemented the C language on the UNIX operating system on the DEC PDP-11 and Brian Kernighan contributed to the development of UNIX. 
 
 The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output. Then continues through in greater detail with Types, Operators, Expressions, Pointers, Arrays, Structs and more Input and Output. This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
 
-## Exercises Progress
+### Exercises Progress
 Following my progress for each chapter.
 
 - [ ] Chapter 1 -  A Tutorial Introduction - (23/24)
@@ -24,7 +24,7 @@ Following my progress for each chapter.
 - [ ] Chapter 7 - Input and Output - (0/09)
 - [ ] Chapter 8 - The UNIX System Interface (0/08)
 
-## Notes
+### Notes
 
 > **Note:** Most input functions are terminated by EOF, for programs reading from stdin, you will need to hit CTRL-D twice to exit if the last character entered was not a newline, this behavior is defined by the POSIX standard (see this  [Stack Overflow question](https://stackoverflow.com/questions/21260674/why-do-i-need-to-type-ctrl-d-twice-to-mark-end-of-file?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)).
 
