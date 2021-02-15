@@ -1,4 +1,4 @@
-## The C programming Language
+## The C Programming Language
 
  ![The C Programming Language Book](https://images-na.ssl-images-amazon.com/images/I/411ejyE8obL._SX377_BO1,204,203,200_.jpg)
 
