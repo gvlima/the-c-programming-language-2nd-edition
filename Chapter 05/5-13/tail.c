@@ -6,10 +6,12 @@
  * lines should be stored as in the sorting program of Section 5.6, not in a two-dimensional array of fixed size.
  **/
 
-
 #include <stdio.h>
 
 int main() {
-    printf("Hello, World!\n");
+
+
+
     return 0;
 }
+

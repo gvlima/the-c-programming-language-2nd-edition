@@ -12,14 +12,14 @@ int main() {
     pos = 1;
 
     while((c=getchar()) != EOF){
-        if(c == '\t'){
+        if(c == '\t') {
             blank = TABINC - ((pos - 1) % TABINC);
-            while(blank > 0){
-                putchar(' ');
+            while(blank > 0) {
+                putchar('#');
                 ++pos;
                 --blank;
             }
-        }else if( c == '\n'){
+        } else if( c == '\n') {
             putchar(c);
             pos = 1;
         } else {
