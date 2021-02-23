@@ -1,6 +1,6 @@
 /**
  * Chapter: 5
- * Exercise: 5-18 - Make dcl recover from input errors.
+ * Exercise: 5-19 - Modify undlc so that it does not add redundant parentheses to declarations.
  **/
 
 #include <stdio.h>
@@ -10,31 +10,47 @@
 #define MAXTOKEN 100
 #define BUFSIZE 100
 
-enum { NAME, PARENS, BRACKETS, ERROR };
+enum { NAME, PARENS, BRACKETS };
 
 void dcl(void);
 void dirdcl(void);
 int gettoken(void);
+int nexttoken(void);
 
 int tokentype;                                  /* type of last token */
 char token[MAXTOKEN];                           /* last token string */
-char name[MAXTOKEN];                            /* identifier name */
-char datatype[MAXTOKEN];                        /* data type = char, int, etc */
 char out[1000];                                 /* output string*/
 char buf[BUFSIZE];                              /* buffer for ungetch */
 int bufp = 0;                                   /* next free position in buf */
+int prevtoken;
 
-/* convert declaration to words */
+/* undlc: convert word description to declaration */
 int main(void) {
-    while (gettoken() != EOF) {                 /* 1st token on line */
-        strcpy(datatype, token);                /*is the datatype*/
-        out[0] = '\0';
-        dcl();                                  /* parse rest of line */
-        if (tokentype == ']') {
-            printf("syntax error.\n");
+    int type;
+    char temp[MAXTOKEN];
+
+    while(gettoken() != EOF){
+        strcpy(out, token);
+        while((type = gettoken()) != '\n'){
+            if(type == PARENS || type == BRACKETS){
+                strcat(out, token);
+            } else if(type == '*'){
+                if((type = nexttoken()) == PARENS || type == BRACKETS){
+                    sprintf(temp, "(*%s)", out);
+                } else {
+                    sprintf(temp, "*%s", out);
+                }
+                strcpy(out, temp);
+            } else if(type == NAME) {
+                sprintf(temp, "%s %s", token, token);
+                strcpy(out, temp);
+            } else {
+                printf("invalid input at %s\n", token);
+            }
         }
-        printf("%s: %s %s\n", name, out, datatype);
+        printf("%s\n", out);
     }
+
     return 0;
 }
 
@@ -74,47 +90,13 @@ int gettoken(void) {
     }
 }
 
-/* dlc: parse a delcarator */
-void dcl(void) {
-    int ns;
-
-    for(ns = 0; gettoken() == '*'; )              /* count *'s */
-        ns++;
-    dirdcl();
-    while(ns-- > 0)
-        strcat(out, " pointer to");
-}
-
-/* dirdcl: parse a direct declarator */
-void dirdcl(void) {
+/* nexttoken: get the next token */
+int nexttoken(void){
     int type;
 
-    if(tokentype == '(') {                        /* ( dcl ) */
-        dcl();
-        if(tokentype != ')') {
-            printf("error: missing )\n");
-            printf("syntax error.\n");
-            tokentype = ERROR;
-            return;
-        }
-    } else if(tokentype == NAME) {                /* variable name */
-        strcpy(name, token);
-    } else {
-        printf("error: expected name or (dcl)\n");
-        printf("syntax error\n");
-        tokentype = ERROR;
-        return;
-    }
-
-    while((type=gettoken()) == PARENS || type == BRACKETS){
-        if(type == PARENS) {
-            strcat(out, " function returning");
-        } else {
-            strcat(out, " array");
-            strcat(out, token);
-            strcat(out, " of");
-        }
-    }
+    type = gettoken();
+    prevtoken = 1;
+    return type;
 }
 
 /* getch: get a character */

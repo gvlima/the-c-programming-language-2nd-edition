@@ -1,7 +1,7 @@
 /**
  * Chapter: 5
- * Exercise: 5-14 - Modify the sort program to handle a -r flag, which indicates sorting in reverse (decreasing) order. Be
- * sure that -r works with -n.
+ * Exercise: 5-17 - Add a field-handling capability, so sorting may be done on fields within lines, each field sorted according
+ * to an independent set of options. (The index for this book was sorted with -df for the index category and -n for the page numbers.)
  **/
 
 #include <stdio.h>
@@ -14,8 +14,10 @@
 static char allocbuf[ALLOCSIZE];                /* storage for alloc */
 static char *allocp = allocbuf;                 /* next free position */
 char* lineptr[MAXLINES];                        /* pointers to text lines */
-int numeric;                                    /* 1 if numeric sort, default is 0 */
-int reverse;                                    /* 1 if numeric sort, default is 0 */
+int numeric;                                    /* numeric sort, default is 0 */
+int reverse;                                    /* sort in reverse order, default is 0 */
+int fold;                                       /* case insensitive, default is 0 */
+int directory;                                  /* directory order, default is 0 */
 
 int get_line(char s[], int lim);
 char* alloc(int n);
@@ -24,14 +26,17 @@ void writelines(char* lineptr[], int nlines);
 void qsort(void *lineptr[], int left, int right, int (*comp)(void *, void *));
 void swap(void* v[], int i, int j);
 int numcmp(char *s1, char *s2);
+int charcmp(char *s1, char *s2);
 double atof(char s[]);
 
 /* sort input lines */
 int main(int argc, char *argv[]) {
-    int nlines;                     /* number of input lines read */
+    int nlines;                                 /* number of input lines read */
 
     numeric = 0;
     reverse = 0;
+    fold = 0;
+    directory = 0;
 
     for(int i=0; i < argc; i++){
         if(argc > 0 && (strcmp(argv[i], "-n") == 0)) {
@@ -41,16 +46,59 @@ int main(int argc, char *argv[]) {
         if(argc > 0 && (strcmp(argv[i], "-r") == 0)) {
             reverse = 1;
         }
+
+        if(argc > 0 && (strcmp(argv[i], "-f") == 0)) {
+            fold = 1;
+        }
+
+        if(argc > 0 && (strcmp(argv[i], "-d") == 0)) {
+            directory = 1;
+        }
     }
 
     if((nlines = readlines(lineptr, MAXLINES)) >= 0){
-         qsort((void **) lineptr, 0, nlines-1, (int (*)(void* , void*))(numeric ? numcmp : strcmp));
-         writelines(lineptr, nlines);
-         return 0;
+        if(numeric){
+            qsort((void **) lineptr, 0, nlines-1, (int (*)(void* , void*))numcmp);
+        } else if(fold){
+            qsort((void **) lineptr, 0, nlines-1, (int (*)(void* , void*))charcmp);
+        } else {
+            qsort((void **) lineptr, 0, nlines-1, (int (*)(void* , void*))strcmp);
+        }
+
+        writelines(lineptr, nlines);
+        return 0;
     } else {
-        printf("input too big to sort.\n");
+        printf("error: input too big to sort.\n");
         return 1;
     }
+}
+
+/* charcmp: compare strings with case insensitive */
+int charcmp(char *s1, char *s2){
+    char a, b;
+
+    do {
+        if(directory){
+            while (!isalnum(*s1) && *s1 != ' ' && *s1 != '\0'){
+                s1++;
+            }
+
+            while (!isalnum(*s2) && *s2 != ' ' && *s2 != '\0'){
+                s1++;
+            }
+        }
+
+        a = fold ? tolower(*s1) :  *s1;
+        s1++;
+        b = fold ? tolower(*s2) :  *s2;
+        s2++;
+
+        if(a == b && a == '\0'){
+            return 0;
+        }
+    } while (a == b);
+
+    return a - b;
 }
 
 /* qsort: sort v[left]...v[right] in some order passed as argument */

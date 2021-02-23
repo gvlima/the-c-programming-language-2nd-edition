@@ -87,7 +87,7 @@ void entab(int tabinc, int m){
 
             putchar(c);
 
-            if(c == '\t' && pos > m) {
+            if (c == '\t' && pos > m) {
                 pos = pos + (tabinc - ((pos - 1) % tabinc)) - 1;
             }
         }
