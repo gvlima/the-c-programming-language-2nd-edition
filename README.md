@@ -19,7 +19,7 @@ Following my progress for each chapter.
 - [x] Chapter 2 -  Types, Operators, and Expressions - (10/10)
 - [x] Chapter 3 - Control Flow - (06/06)
 - [x] Chapter 4 - Functions and Program Structure - (14/14)
-- [ ] Chapter 5 - Pointers and Arrays - (11/20)
+- [x] Chapter 5 - Pointers and Arrays - (20/20)
 - [ ] Chapter 6 - Structures - (0/06)
 - [ ] Chapter 7 - Input and Output - (0/09)
 - [ ] Chapter 8 - The UNIX System Interface (0/08)
