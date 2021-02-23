@@ -4,3 +4,9 @@
 
 # untracked files
 **/CMakeLists.txt
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
