@@ -42,7 +42,7 @@ int main() {
 
             if(c == '\n') {
                 pos = 0;
-            } else if ( c == '\t') {
+            } else if (c == '\t') {
                 pos = pos + (TABINC - ((pos - 1) % TABINC)) - 1;
             }
         }
