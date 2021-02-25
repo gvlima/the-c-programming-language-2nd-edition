@@ -9,13 +9,13 @@
 
 int main() {
     int c, blank, pos;
-    pos = 1;
+    pos = 0;
 
     while((c=getchar()) != EOF){
         if(c == '\t') {
-            blank = TABINC - ((pos - 1) % TABINC);
+            blank = TABINC - (pos % TABINC);
             while(blank > 0) {
-                putchar('#');
+                putchar('*');
                 ++pos;
                 --blank;
             }

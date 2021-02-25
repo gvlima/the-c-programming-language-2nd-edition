@@ -8,7 +8,7 @@
 
 #define MAXLINE 1000 /* max input line size */
 
-int read_line(char line[], int maxline);
+int get_line(char line[], int maxline);
 void copy(char to[], char from[]);
 
 int main() {
@@ -18,21 +18,22 @@ int main() {
     char longest[MAXLINE]; /* longest line saved */
 
     max = 0;
-    while((len = read_line(line, MAXLINE)) > 0){
+    while((len = get_line(line, MAXLINE)) > 0){
         if(len > max){
             max = len;
             copy(longest, line);
         }
     }
     if(max > 0) {
-        printf("Length: %d | Line: %s", max, longest);
+        printf("line: %s", longest);
+        printf("length: %d", max);
     }
 
     return 0;
 }
 
-/* read_line: read a line into s, return length  */
-int read_line(char s[], int lim){
+/* get_line: read a line into s, return length  */
+int get_line(char s[], int lim){
     int c, i;
 
     for(i=0; i<lim-1 && (c=getchar()) != EOF && c != '\n'; ++i){
@@ -57,8 +58,3 @@ void copy(char to[], char from[]){
         ++i;
     }
 }
-
-/**
- * Comment: The readline function receive two arguments, the first argument is an char array and is passed a memory address of array (call by reference),
- * the second argument is an integer and it makes a copy of value into function (call by value).
- **/
