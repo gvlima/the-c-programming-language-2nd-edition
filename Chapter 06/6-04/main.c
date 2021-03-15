@@ -1,8 +1,7 @@
 /**
  * Chapter: 6
- * Exercise: 6-02 - Write a program that reads a C program and prints in alphabetical order each group of variable names
- * that are identical in the first 6 characters, but different somewhere thereafter. Don't count words within strings and
- * comments. Make 6 a parameter that can be set from the command line.
+ * Exercise: 6-04 - Write a program that prints the distinct words in its input sorted into decreasing order of frequency of
+ * occurrence. Precede each word by its count.
  **/
 
 #include <stdio.h>
@@ -11,92 +10,67 @@
 #include <string.h>
 
 #define MAXWORD 100
-#define BUFSIZE 10000
-#define DEFAULT_NUM 6
-#define FOUND 1
-#define NOT_FOUND 0
+#define BUFSIZE 1000
 
 char buf[BUFSIZE];                              /* buffer for ungetch */
 int bufp = 0;                                   /* next free position in buf */
 
 struct tnode {
     char *word;
-    int match;
+    int count;
     struct tnode *left;
     struct tnode *right;
 };
 
 int getword(char *, int);
-int compare(char *, struct tnode *, int, int *);
+struct tnode *addtree(struct tnode *, char *);
 void treeprint(struct tnode *);
 struct tnode *talloc(void);
-struct tnode *addtree(struct tnode *, char *, int, int *);
 char* strdpl(char *);
 
-int main(int argc, char *argv[]) {
-    int num, status;
+int main() {
     struct tnode *root;
     char word[MAXWORD];
 
     root = NULL;
-    status = NOT_FOUND;
-    num = (argc > 1 ? atoi(argv[1]) : DEFAULT_NUM);
 
-    while(getword(word, MAXWORD) != EOF){
-        if(isalpha(word[0]) && strlen(word) >= num){
-            root = addtree(root, word, num, &status);
+    while(getword(word,MAXWORD) != EOF){
+        if(isalpha(word[0])){
+            root = addtree(root, word);
         }
-        status = NOT_FOUND;
     }
 
     treeprint(root);
+
     return 0;
 }
 
 /* addtree: add a node with w, at or below p */
-struct tnode *addtree(struct tnode *p, char *w, int num, int *found){
+struct tnode *addtree(struct tnode *p, char *w){
     int cond;
 
     if(p == NULL) {
         p = talloc();
         p->word = strdpl(w);
-        p->match = *found;
+        p->count = 1;
         p->left = p->right = NULL;
-    } else if((cond = compare(w, p, num, found)) < 0){
-        p->left = addtree(p->left, w, num, found);
-    } else if(cond > 0){
-        p->right = addtree(p->right, w, num, found);
+    } else if((cond = strcmp(w, p->word)) == 0){
+        p->count++;
+    } else {
+        if(p->count < p->left->count){
+
+        }
+        p->left = addtree(p->left, w);
     }
 
     return p;
-}
-
-/* compare: compare the first num characters from string */
-int compare(char *s, struct tnode *p, int num, int *found){
-    int i;
-    char *t = p->word;
-
-    for(i=0; *s == *t; i++, s++, t++){
-        if(*s == '\0'){
-            return 0;
-        }
-    }
-
-    if(i >= num){
-        *found = FOUND;
-        p->match = FOUND;
-    }
-
-    return *s - *t;
 }
 
 /* treeprint: in-order print of tree p */
 void treeprint(struct tnode *p){
     if(p != NULL){
         treeprint(p->left);
-        if(p->match){
-            printf("%s\n", p->word);
-        }
+        printf("%4d %s\n", p->count, p->word);
         treeprint(p->right);
     }
 }

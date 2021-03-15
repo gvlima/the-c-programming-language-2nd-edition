@@ -1,8 +1,7 @@
 /**
  * Chapter: 6
- * Exercise: 6-02 - Write a program that reads a C program and prints in alphabetical order each group of variable names
- * that are identical in the first 6 characters, but different somewhere thereafter. Don't count words within strings and
- * comments. Make 6 a parameter that can be set from the command line.
+ * Exercise: 6-03 - Write a cross-referencer that prints a list of all words in a document, and, for each word, a list of
+ * the line numbers on which it occurs. Remove noise words like "the", "and" and so on.
  **/
 
 #include <stdio.h>
@@ -12,41 +11,47 @@
 
 #define MAXWORD 100
 #define BUFSIZE 10000
-#define DEFAULT_NUM 6
-#define FOUND 1
-#define NOT_FOUND 0
+#define LINE_NUMBERS 10
+#define MIN_LENGHT 3
+#define TRUE 1
+#define FALSE 0
 
 char buf[BUFSIZE];                              /* buffer for ungetch */
 int bufp = 0;                                   /* next free position in buf */
 
 struct tnode {
     char *word;
-    int match;
+    int count;
+    int lines[LINE_NUMBERS];
     struct tnode *left;
     struct tnode *right;
 };
 
-int getword(char *, int);
-int compare(char *, struct tnode *, int, int *);
+int getword(char *, int, int *);
+struct tnode *addtree(struct tnode *, char *, int *);
 void treeprint(struct tnode *);
 struct tnode *talloc(void);
-struct tnode *addtree(struct tnode *, char *, int, int *);
 char* strdpl(char *);
 
-int main(int argc, char *argv[]) {
-    int num, status;
+int main() {
+    int nl;                                      /* new line */
+    int lc;                                      /* line count */
     struct tnode *root;
     char word[MAXWORD];
 
     root = NULL;
-    status = NOT_FOUND;
-    num = (argc > 1 ? atoi(argv[1]) : DEFAULT_NUM);
+    nl = FALSE;
+    lc = 1;
 
-    while(getword(word, MAXWORD) != EOF){
-        if(isalpha(word[0]) && strlen(word) >= num){
-            root = addtree(root, word, num, &status);
+    while((getword(word,MAXWORD, &nl)) != EOF){
+        if(isalpha(word[0]) && strlen(word) > MIN_LENGHT){
+            root = addtree(root, word, &lc);
         }
-        status = NOT_FOUND;
+
+        if(nl){
+            lc++;
+            nl = FALSE;
+        }
     }
 
     treeprint(root);
@@ -54,49 +59,38 @@ int main(int argc, char *argv[]) {
 }
 
 /* addtree: add a node with w, at or below p */
-struct tnode *addtree(struct tnode *p, char *w, int num, int *found){
+struct tnode *addtree(struct tnode *p, char *w, int *line){
     int cond;
 
     if(p == NULL) {
         p = talloc();
+        p->count = 1;
+        p->lines[p->count] = *line;
         p->word = strdpl(w);
-        p->match = *found;
         p->left = p->right = NULL;
-    } else if((cond = compare(w, p, num, found)) < 0){
-        p->left = addtree(p->left, w, num, found);
-    } else if(cond > 0){
-        p->right = addtree(p->right, w, num, found);
+    } else if((cond = strcmp(w, p->word)) == 0){
+        p->count++;
+        p->lines[p->count] = *line;
+    } else if(cond < 0){
+        p->left = addtree(p->left, w, line);
+    } else {
+        p->right = addtree(p->right, w, line);
     }
 
     return p;
 }
 
-/* compare: compare the first num characters from string */
-int compare(char *s, struct tnode *p, int num, int *found){
-    int i;
-    char *t = p->word;
-
-    for(i=0; *s == *t; i++, s++, t++){
-        if(*s == '\0'){
-            return 0;
-        }
-    }
-
-    if(i >= num){
-        *found = FOUND;
-        p->match = FOUND;
-    }
-
-    return *s - *t;
-}
-
 /* treeprint: in-order print of tree p */
 void treeprint(struct tnode *p){
+    int i;
     if(p != NULL){
         treeprint(p->left);
-        if(p->match){
-            printf("%s\n", p->word);
+        printf("%i ", p->count);
+        printf("%s - ", p->word);
+        for(i=1; i <= p->count; ++i){
+            printf(" %i ", p->lines[i]);
         }
+        printf("\n");
         treeprint(p->right);
     }
 }
@@ -119,7 +113,7 @@ char* strdpl(char *s){
 }
 
 /* getword: get next word of character from input */
-int getword(char *word, int lim){
+int getword(char *word, int lim, int *nl){
     int c, d, getch(void), comment(void);
     void ungetch(int);
     char *w = word;
@@ -133,7 +127,13 @@ int getword(char *word, int lim){
 
     if(isalpha(c) || c == '_' || c == '#'){
         for(; --lim > 0; w++){
-            if(!isalnum(*w = getch())){
+            *w = getch();
+
+            if(*w == '\n'){
+                *nl = TRUE;
+            }
+
+            if(!isalnum(*w)){
                 ungetch(*w);
                 break;
             }
