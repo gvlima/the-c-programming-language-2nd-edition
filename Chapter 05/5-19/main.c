@@ -12,8 +12,6 @@
 
 enum { NAME, PARENS, BRACKETS };
 
-void dcl(void);
-void dirdcl(void);
 int gettoken(void);
 int nexttoken(void);
 

@@ -27,7 +27,7 @@ int bufp = 0;                                   /* next free position in buf */
 /* convert declaration to words */
 int main(void) {
     while (gettoken() != EOF) {                 /* 1st token on line */
-        strcpy(datatype, token);                /*is the datatype*/
+        strcpy(datatype, token);                /* is the datatype */
         out[0] = '\0';
         dcl();                                  /* parse rest of line */
         if (tokentype == ']') {

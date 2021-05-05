@@ -35,7 +35,6 @@ int main(int argc, char *argv[]) {
     numeric = 0;
     reverse = 0;
     fold = 0;
-    directory = 0;
 
     for(int i=0; i < argc; i++){
         if(argc > 0 && (strcmp(argv[i], "-n") == 0)) {

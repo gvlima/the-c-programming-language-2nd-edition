@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+/* detab: replace tab in the input with proper number of blanks */
 void detab(int tabinc){
     int c, blank, pos;
     pos = 1;
@@ -51,6 +52,7 @@ void detab(int tabinc){
     }
 }
 
+/* entab: replace a number of blanks by number of tabs */
 void entab(int tabinc) {
     int c, pos, tab, blank;
 
