@@ -17,15 +17,19 @@ int main(int argc, char *argv[]) {
         while ((c=getchar()) != EOF){
             printf("%c", tolower(c));
         }
-    } else {
+    } else if(strcmp(argv[0], "./upper") == 0){
         while ((c=getchar()) != EOF){
             printf("%c", toupper(c));
         }
+    } else {
+        printf("error: invalid invoked name.");
     }
 
     return 0;
 }
 
+
 /**
- * Comment:
+ * compile: gcc -o lower main.c and gcc -o upper main.c
+ * usage: ./lower or ./upper
  **/

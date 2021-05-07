@@ -59,3 +59,8 @@ int main(int argc, char *argv[]) {
     return found;
 }
 
+/**
+ * compile: gcc -o find main.c
+ * usage: ./find "filename" "patter" -x -n
+ * example: ./find test_file.txt programming -x -n
+ **/

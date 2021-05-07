@@ -3,7 +3,6 @@
  * Exercise: 7-03 - Revise mainprintf to handle more of the other facilities of printf.
  **/
 
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <ctype.h>

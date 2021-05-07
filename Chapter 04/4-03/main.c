@@ -25,6 +25,7 @@ double  val[MAXVAL];
 int sp = 0;
 int bufp = 0;
 
+/* reverse polish calculator */
 int main() {
     int type;
     double op2;

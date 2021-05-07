@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-
+/* compare: print fist different line in two files */
 void compare(char *line1, char *line2, FILE *fp1, FILE *fp2) {
     char *lp1, *lp2;
 
@@ -62,3 +62,9 @@ void compare(char *line1, char *line2, FILE *fp1, FILE *fp2) {
 
     } while(lp1 != NULL && lp2 != NULL);
 }
+
+/**
+ * comment: There are two files to test, pass they names as args.
+ * usage: ./main "filename" "filename"
+ * example: ./main "test_file1.txt" "test_file2.txt"
+ **/

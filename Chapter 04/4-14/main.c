@@ -5,20 +5,18 @@
 
 #include <stdio.h>
 
-#define swap(t, x, y) {
-t temp;           \
-                        temp = x;         \
-                        x = y;            \
-                        y = temp;         \
-                     };
+#define SWAP(t,x,y) {t tmp;\
+                       tmp = y;\
+                       y = x;\
+                       x = tmp;\
+                    }
 
-int main() {
-    int x = 2, y = 3;
+int main(void) {
+    int a = 100;
+    int b = 50;
 
-    printf("x: %d, y: %d\n", x, y);
-
-    swap(int, x, y)
-    printf("x: %d, y: %d\n", x, y);
+    SWAP(int, a, b);
+    printf("A = %d B = %d\n", a, b);
 
     return 0;
 }

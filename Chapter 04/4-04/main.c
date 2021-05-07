@@ -29,6 +29,7 @@ double  stack[MAXVAL];
 int sp = 0; /* next free stack position */
 int bufp = 0;
 
+/* reverse polish calculator */
 int main() {
     int type;
     double op1, op2;

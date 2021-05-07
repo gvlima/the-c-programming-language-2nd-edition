@@ -12,17 +12,7 @@ Kernighan & Ritchie’s **_The C Programming Language_** it’s a small book, bu
 
 The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output. Then continues through in greater detail with Types, Operators, Expressions, Pointers, Arrays, Structs and more Input and Output. This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
 
-### Exercises Progress
-Following my progress for each chapter.
 
-- [ ] Chapter 1 -  A Tutorial Introduction - (23/24)
-- [x] Chapter 2 -  Types, Operators, and Expressions - (10/10)
-- [x] Chapter 3 - Control Flow - (06/06)
-- [x] Chapter 4 - Functions and Program Structure - (14/14)
-- [x] Chapter 5 - Pointers and Arrays - (20/20)
-- [ ] Chapter 6 - Structures - (0/06)
-- [ ] Chapter 7 - Input and Output - (0/09)
-- [ ] Chapter 8 - The UNIX System Interface (0/08)
 
 ### Notes
 

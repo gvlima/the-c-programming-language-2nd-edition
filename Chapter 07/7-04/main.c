@@ -72,9 +72,7 @@ int minscanf(char *fmt, ...){
         }
 
         i=0;                                     /* reset index */
-
     }
 
     va_end(ap);                                  /* clean up when done */
-
 }

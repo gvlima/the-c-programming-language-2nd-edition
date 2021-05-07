@@ -9,7 +9,7 @@
 void reverse(char s[], int i, int j);
 
 int main() {
-    char s1[20] = "gustavo";
+    char s1[20] = "learning";
     reverse(s1, 0, strlen(s1) -1);
     printf("%s\n", s1);
     return 0;

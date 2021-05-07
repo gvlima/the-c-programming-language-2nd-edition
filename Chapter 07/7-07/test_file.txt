@@ -1,0 +1,8 @@
+The first C programming book “C Programming Language”
+was published in 1978, written by
+Brian Kernighan and Dennis Ritchie.
+With the rapid growth of the C language for several years,
+it was time to standardize the language and are also known
+as ANSI C. The focus of the book is the C programming language,
+however, the approach is general, so it can be extended to
+all programming languages.

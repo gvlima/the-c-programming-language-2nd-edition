@@ -1,6 +1,7 @@
 /**
  * Chapter: 4
- * Exercise: 4-11 - Modify getop so that it doesn't need to use ungetch. Hint: use an internal static variable.
+ * Exercise: 4-10 - An alternate organization uses getline to read an entire input line; This makes getch and ungetch
+ * unnecessary. Revise the calculator to use this approach.
  **/
 
 #include <stdio.h>
@@ -11,18 +12,17 @@
 #define MAXOP 100 /* max size of operand or operator */
 #define MAXVAL 100 /* maximum depth of val stack */
 #define NUMBER '0' /* signal that a number was found */
-#define BUFSIZE 100 /* buffer for ungetch */
+#define MAXLINE 100
 
 int getop(char []);
-int getch(void);
-void ungetch(int);
 void push(double);
 double pop(void);
+int get_line(char s[], int limit);
 
-char buf[BUFSIZE];
 double  val[MAXVAL];
+char line[MAXLINE];
+int li = 0;
 int sp = 0;
-int bufp = 0;
 
 /* reverse polish calculator */
 int main() {
@@ -95,18 +95,18 @@ double pop(void){
 /* getop: get next operator of numeric operand */
 int getop(char s[]){
     int i, c;
-    static int last_char = 0;
 
-    if(last_char == 0){
-        c = getch();
-    } else {
-        c = last_char;
-        last_char = 0;
+    if(line[li] == '\0'){
+        if(get_line(line, MAXLINE) == 0){
+            return EOF;
+        } else {
+            li = 0;
+        }
     }
 
-    while((s[0] = c) == ' ' || c == '\t'){
-        c = getch();
-    }
+    while ((s[0] = c = line[li++]) == ' ' || c == '\t')
+        ;
+
 
     s[1] = '\0';
 
@@ -117,35 +117,36 @@ int getop(char s[]){
     i = 0;
 
     if(isdigit(c)){
-        while (isdigit(s[++i] = c = getch()))
+        while (isdigit(s[++i] = c = line[li++]))
             ;
 
     }
 
     if(c == '.'){
-        while (isdigit(s[++i] = c = getch()))
+        while (isdigit(s[++i] = c = line[li++]))
             ;
     }
 
     s[i] = '\0';
 
-    if(c != EOF){
-        last_char = c;
-    }
+    li--;
 
     return NUMBER;
 }
 
-/* getch: get a character */
-int getch(void){
-    return (bufp > 0) ? buf[--bufp] : getchar();
-}
+/* get_line: read a line into s, return length  */
+int get_line(char s[], int lim){
+    int c, i;
 
-/* ungetch: push character back on input */
-void ungetch(int c){
-    if(bufp >= BUFSIZE){
-        printf("ungetch: too many characters\n");
-    } else {
-        buf[bufp++] = c;
+    for(i=0; i<lim-1 && (c=getchar()) != EOF && c != '\n'; ++i){
+        s[i] = c;
     }
+
+    if(c == '\n'){
+        s[i]=c;
+        ++i;
+    }
+
+    s[i] = '\0';
+    return i;
 }

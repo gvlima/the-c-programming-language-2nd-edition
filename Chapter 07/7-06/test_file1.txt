@@ -1,0 +1,4 @@
+The C Programming Language
+Dennis Ritchie
+Brian Kernighan
+Kernighan & Ritchie’s The C Programming Language

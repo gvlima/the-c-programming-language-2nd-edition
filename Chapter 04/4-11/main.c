@@ -1,7 +1,6 @@
 /**
  * Chapter: 4
- * Exercise: 4-10 - An alternate organization uses getline to read an entire input line; This makes getch and ungetch
- * unnecessary. Revise the calculator to use this approach.
+ * Exercise: 4-11 - Modify getop so that it doesn't need to use ungetch. Hint: use an internal static variable.
  **/
 
 #include <stdio.h>
@@ -12,17 +11,17 @@
 #define MAXOP 100 /* max size of operand or operator */
 #define MAXVAL 100 /* maximum depth of val stack */
 #define NUMBER '0' /* signal that a number was found */
-#define MAXLINE 100
+#define BUFSIZE 100 /* buffer for ungetch */
 
 int getop(char []);
+int getch(void);
 void push(double);
 double pop(void);
-int get_line(char s[], int limit);
 
+char buf[BUFSIZE];
 double  val[MAXVAL];
-char line[MAXLINE];
-int li = 0;
 int sp = 0;
+int bufp = 0;
 
 /* reverse polish calculator */
 int main() {
@@ -95,18 +94,18 @@ double pop(void){
 /* getop: get next operator of numeric operand */
 int getop(char s[]){
     int i, c;
+    static int last_char = 0;
 
-    if(line[li] == '\0'){
-        if(get_line(line, MAXLINE) == 0){
-            return EOF;
-        } else {
-            li = 0;
-        }
+    if(last_char == 0){
+        c = getch();
+    } else {
+        c = last_char;
+        last_char = 0;
     }
 
-    while ((s[0] = c = line[li++]) == ' ' || c == '\t')
-        ;
-
+    while((s[0] = c) == ' ' || c == '\t'){
+        c = getch();
+    }
 
     s[1] = '\0';
 
@@ -117,36 +116,26 @@ int getop(char s[]){
     i = 0;
 
     if(isdigit(c)){
-        while (isdigit(s[++i] = c = line[li++]))
+        while (isdigit(s[++i] = c = getch()))
             ;
 
     }
 
     if(c == '.'){
-        while (isdigit(s[++i] = c = line[li++]))
+        while (isdigit(s[++i] = c = getch()))
             ;
     }
 
     s[i] = '\0';
 
-    li--;
+    if(c != EOF){
+        last_char = c;
+    }
 
     return NUMBER;
 }
 
-/* get_line: read a line into s, return length  */
-int get_line(char s[], int lim){
-    int c, i;
-
-    for(i=0; i<lim-1 && (c=getchar()) != EOF && c != '\n'; ++i){
-        s[i] = c;
-    }
-
-    if(c == '\n'){
-        s[i]=c;
-        ++i;
-    }
-
-    s[i] = '\0';
-    return i;
+/* getch: get a character */
+int getch(void){
+    return (bufp > 0) ? buf[--bufp] : getchar();
 }
