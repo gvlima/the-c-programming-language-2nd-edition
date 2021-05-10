@@ -10,14 +10,14 @@ This repository contains the _solutions_ to the exercises from each chapter of t
 
 The book starts with a  introduction, which shows the essential elements of the language. It’s very much an overview, so details and rules are not the focus. It focusses on the basics: variables and constants, arithmetic, control flow, functions and some input and output. Then continues through in greater detail with Types, Operators, Expressions, Pointers, Arrays, Structs and more Input and Output. This book is a short read, however it is jam-packed with everything about the language and its fundamental concepts.
 
-Chapter 1. A Tutorial Introduction
-Chapter 2. Types, Operators, and Expressions
-Chapter 3. Control Flow
-Chapter 4. Functions and Program Structure
-Chapter 5. Pointers and Arrays
-Chapter 6. Structures
-Chapter 7. Input and Output
-Chapter 8. The UNIX System Interface
+- Chapter 1. A Tutorial Introduction
+- Chapter 2. Types, Operators, and Expressions
+- Chapter 3. Control Flow
+- Chapter 4. Functions and Program Structure
+- Chapter 5. Pointers and Arrays
+- Chapter 6. Structures
+- Chapter 7. Input and Output
+- Chapter 8. The UNIX System Interface
 
 ### Test Files
 The test data files are provided to support manually testing the exercises. Specifically, the ones that draw from standard input can be manually tested with these.
