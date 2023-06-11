@@ -5,6 +5,8 @@ This repository contains the _solutions_ to the exercises from each chapter of t
 
 The first C programming book “The C Programming Language” was published in 1978, written by Brian Kernighan and Dennis Ritchie. With the rapid growth of the C language for several years, it was time to standardize the language and are also known as ANSI C. The focus of the book is the C programming language, however, the approach is general, so it can be extended to all programming languages.
 
+<img src="https://m.media-amazon.com/images/I/411ejyE8obL._SX258_BO1,204,203,200_QL70_ML2_.jpg" >
+
 ### Content
 
 - Chapter 1. A Tutorial Introduction
